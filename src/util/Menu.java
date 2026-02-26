@@ -1,5 +1,7 @@
 package util;
 
+import Model.Cliente;
+import Service.ClienteService;
 import java.util.Scanner;
 
 public class Menu {
@@ -26,15 +28,34 @@ public class Menu {
 
 
     public static void exibirCadastroCliente(){
-        System.out.println("===========================");
-        System.out.println("ID: ");
-        System.out.println("Nome: ");
-        System.out.println("CPF: ");
-        System.out.println("===========================");
+        Scanner scanner = new Scanner(System.in);
+        String choose;
+        int id;
+        String nome;
+        String cpf;
+        do {
 
+            System.out.println("===========================");
+            System.out.print("ID: ");
+            id = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Nome: ");
+            nome = scanner.nextLine();
+            System.out.print("CPF: ");
+            cpf = scanner.nextLine();
+            System.out.println("===========================");
 
+            Cliente cliente = new Cliente(id,nome,cpf);
+            ClienteService.setList(cliente);
 
+            System.out.println("\nDeseja cadastrar outro cliente?");
+            System.out.println("(1 - SIM) (2 - NAO)");
+            choose = scanner.nextLine();
+        }while(choose.equals("1")||choose.equals("SIM"));
+scanner.close();
     }
+
+
 
 
 
