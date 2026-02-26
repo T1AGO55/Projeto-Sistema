@@ -16,6 +16,59 @@ public class ClienteService {
     }
 
 
+    public static boolean verificaCPF(String cpf){
+        cpf = cpf.replaceAll("[^0-9]", "");
+        if (cpf.length() != 11){
+            return false;
+        }
+        //verifica se o cpf tem numeros repetidos ex:222.222.222-22
+        if (cpf.matches("(\\d)\\1{10}")) {
+            return false;
+        }
+
+        /*
+ 1) O CPF possui 11 dígitos, sendo os 2 últimos dígitos verificadores.
+
+ 2) Para calcular o 1º dígito:
+    - Multiplica os 9 primeiros dígitos pelos pesos de 10 até 2.
+    - Soma os resultados.
+    - Faz (soma × 10) % 11.
+    - Se o resultado for 10 ou 11, considera 0.
+    - O valor obtido deve ser igual ao 10º dígito.
+
+ 3) Para calcular o 2º dígito:
+    - Multiplica os 10 primeiros dígitos pelos pesos de 11 até 2.
+    - Soma os resultados.
+    - Faz (soma × 10) % 11.
+    - Se o resultado for 10 ou 11, considera 0.
+    - O valor obtido deve ser igual ao 11º dígito.
+*/
+
+        int soma = 0;
+        for (int i = 0; i <9; i++){
+            soma += Character.getNumericValue(cpf.charAt(i)) *(10 - i);
+        }
+
+        int resto = (soma * 10) % 11;
+        if (resto == 10){
+            resto = 0;
+        }
+        if (resto != Character.getNumericValue(cpf.charAt(9))){
+            return false;
+        }
+
+        soma = 0;
+        for (int i=0; i< 10; i++){
+            soma += Character.getNumericValue(cpf.charAt(i)) *(11 -i);
+        }
+        resto = (soma * 10) % 11;
+        if (resto == 10){
+            resto = 0;
+        }
+
+        return resto == Character.getNumericValue(cpf.charAt(10));
+    }
+
     public static void listarClientes() {
 
         Scanner scanner = new Scanner(System.in);

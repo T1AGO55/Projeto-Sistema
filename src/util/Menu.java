@@ -41,8 +41,13 @@ public class Menu {
             scanner.nextLine();
             System.out.print("Nome: ");
             nome = scanner.nextLine();
-            System.out.print("CPF: ");
-            cpf = scanner.nextLine();
+            do {
+                System.out.print("CPF: ");
+                cpf = scanner.nextLine();
+                if (!ClienteService.verificaCPF(cpf)){
+                    System.out.println("CPF Invalido!");
+                }
+            }while(!ClienteService.verificaCPF(cpf));
             System.out.println("===========================");
 
             Cliente cliente = new Cliente(id,nome,cpf);
