@@ -52,7 +52,6 @@ public class Menu {
             System.out.println("(1 - SIM) (2 - NAO)");
             choose = scanner.nextLine();
         }while(choose.equals("1")||choose.equals("SIM"));
-scanner.close();
     }
 
 
