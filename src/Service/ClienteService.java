@@ -9,14 +9,14 @@ import java.util.Scanner;
 
 public class ClienteService {
 
-   static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Cliente> clientes = new ArrayList<>();
 
-    public static void setList(Cliente c){
+    public static void setList(Cliente c) {
         clientes.add(c);
     }
 
 
-    public static void listarClientes(){
+    public static void listarClientes() {
 
         Scanner scanner = new Scanner(System.in);
         int escolha;
@@ -39,20 +39,21 @@ public class ClienteService {
                 case 1:
 
                     List<Cliente> clientesID = clientes.stream().sorted(Comparator.comparingInt(Cliente::getId)).toList();
+                    System.out.println("\n=============================");
                     clientesID.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpf()));
                     break;
 
                 case 2:
 
                     List<Cliente> clientesNome = clientes.stream().sorted(Comparator.comparing(Cliente::getNome)).toList();
+                    System.out.println("\n=============================");
                     clientesNome.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpf()));
                     break;
 
                 case 3:
-
-
-
-
+                    List<Cliente> clientesCPF = clientes.stream().sorted(Comparator.comparing(Cliente::getCpf)).toList();
+                    System.out.println("\n=============================");
+                    clientesCPF.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpf()));
                     break;
 
 
@@ -69,12 +70,9 @@ public class ClienteService {
             System.out.println("(1 - SIM) (2 - NAO)");
             choose = scanner.nextLine().trim().toUpperCase();
 
-        }while (choose.equals("2")||choose.equals("NAO"));
+        } while (choose.equals("2") || choose.equals("NAO"));
 
     }
-
-
-
 
 
 }
