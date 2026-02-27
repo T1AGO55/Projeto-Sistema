@@ -23,7 +23,7 @@ public class Cliente {
     public  String getCpf() {
         return cpf;
     }
-    //formatação do cpf
+    //formatação do CPF
     public String getCpfFormatado() {
         return cpf.substring(0,3) + "." +
                 cpf.substring(3,6) + "." +
