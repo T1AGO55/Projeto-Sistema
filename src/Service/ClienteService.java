@@ -16,14 +16,14 @@ public class ClienteService {
     }
 
 
-    public static boolean verificaCPF(String cpf){
+    public static boolean verificaCPF(String cpf) {
         cpf = cpf.replaceAll("[^0-9]", "");
-        if (cpf.length() != 11){
-            return false;
+        if (cpf.length() != 11) {
+            return true;
         }
         //verifica se o cpf tem numeros repetidos ex:222.222.222-22
         if (cpf.matches("(\\d)\\1{10}")) {
-            return false;
+            return true;
         }
 
         /*
@@ -45,28 +45,42 @@ public class ClienteService {
 */
 
         int soma = 0;
-        for (int i = 0; i <9; i++){
-            soma += Character.getNumericValue(cpf.charAt(i)) *(10 - i);
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
         }
 
         int resto = (soma * 10) % 11;
-        if (resto == 10){
+        if (resto == 10) {
             resto = 0;
         }
-        if (resto != Character.getNumericValue(cpf.charAt(9))){
-            return false;
+        if (resto != Character.getNumericValue(cpf.charAt(9))) {
+            return true;
         }
 
         soma = 0;
-        for (int i=0; i< 10; i++){
-            soma += Character.getNumericValue(cpf.charAt(i)) *(11 -i);
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
         }
         resto = (soma * 10) % 11;
-        if (resto == 10){
+        if (resto == 10) {
             resto = 0;
         }
 
-        return resto == Character.getNumericValue(cpf.charAt(10));
+        return resto != Character.getNumericValue(cpf.charAt(10));
+    }
+
+    public static boolean verificarCPFDUP(String cpf) {
+
+        cpf = cpf.replaceAll("[^0-9]", "");
+
+        String finalCpf = cpf;
+        Cliente teste = clientes.stream().filter(c -> c.getCpf().replaceAll("[^0-9]", "").equals(finalCpf)).findFirst().orElse(null);
+        if (teste != null) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public static void listarClientes() {
@@ -109,6 +123,11 @@ public class ClienteService {
                     clientesCPF.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpf()));
                     break;
 
+
+                case 4:
+
+
+                    break;
 
                 default:
                     System.out.println("Opcao Invalida");

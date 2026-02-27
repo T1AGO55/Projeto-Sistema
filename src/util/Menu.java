@@ -44,10 +44,13 @@ public class Menu {
             do {
                 System.out.print("CPF: ");
                 cpf = scanner.nextLine();
-                if (!ClienteService.verificaCPF(cpf)){
+                if (ClienteService.verificaCPF(cpf)){
                     System.out.println("CPF Invalido!");
                 }
-            }while(!ClienteService.verificaCPF(cpf));
+               if (ClienteService.verificarCPFDUP(cpf)){
+                    System.out.println("CPF JA ESTA SENDO USADO!");
+                }
+            }while(ClienteService.verificaCPF(cpf) || ClienteService.verificarCPFDUP(cpf));
             System.out.println("===========================");
 
             Cliente cliente = new Cliente(id,nome,cpf);
