@@ -36,8 +36,14 @@ public class Menu {
         do {
 
             System.out.println("===========================");
+            do {
             System.out.print("ID: ");
             id = scanner.nextInt();
+            if (ClienteService.verificarIDDUP(id)){
+                System.out.println("ID JA FOI USADO");
+            }
+
+            }while(ClienteService.verificarIDDUP(id));
             scanner.nextLine();
             System.out.print("Nome: ");
             nome = scanner.nextLine();

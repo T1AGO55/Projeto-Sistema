@@ -66,6 +66,15 @@ public class ClienteService {
         return resto != Character.getNumericValue(cpf.charAt(10));
     }
 
+    public static boolean verificarIDDUP(int id) {
+        Cliente teste = clientes.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
+        if (teste != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean verificarCPFDUP(String cpf) {
 
         cpf = cpf.replaceAll("[^0-9]", "");
