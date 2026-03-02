@@ -68,6 +68,14 @@ public class Menu {
         }while(choose.equals("1")||choose.equals("SIM"));
     }
 
+    public static void exibirCadastroProduto(){
+
+
+
+
+
+
+    }
 
 
 
