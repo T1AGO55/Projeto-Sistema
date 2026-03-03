@@ -4,6 +4,7 @@ import Model.Cliente;
 import Service.ClienteService;
 import Service.ProdutoService;
 import Model.Produto;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -76,11 +77,23 @@ public class Menu {
         String nome;
         double preco;
         int QuantidadeEstoque;
-
-
+        int EscolhaTipoProduto;
         do {
 
             System.out.println("===========================");
+            do {
+                System.out.println("Selecione o tipo do produto:");
+                int i = 1;
+                for (Produto.TipoProduto tipo : Produto.TipoProduto.values()) {
+                    System.out.println(i + " - " + tipo.getDescricao());
+                    i++;
+                }
+                System.out.print("Escolha: ");
+                EscolhaTipoProduto = scanner.nextInt();
+                scanner.nextLine();
+
+            }while (EscolhaTipoProduto < 1 || EscolhaTipoProduto > Produto.TipoProduto.values().length);
+
             do {
                 System.out.print("ID: ");
                 id = scanner.nextInt();
@@ -92,18 +105,21 @@ public class Menu {
             scanner.nextLine();
             System.out.print("Nome: ");
             nome = scanner.nextLine();
-
-            System.out.println("Preco: R$");
-            preco = scanner.nextDouble();
-            scanner.nextLine();
-
-            System.out.println("Quantidade em Estoque: ");
+            do {
+                System.out.print("Preco: R$");
+                preco = scanner.nextDouble();
+                scanner.nextLine();
+                if (preco <= 0) {
+                    System.out.println("Preco Invalido!");
+                }
+            } while (preco <= 0);
+            System.out.print("Quantidade em Estoque: ");
             QuantidadeEstoque = scanner.nextInt();
             scanner.nextLine();
 
             System.out.println("===========================");
 
-            Produto produto = new Produto(id, nome, preco,QuantidadeEstoque);
+            Produto produto = new Produto(id, nome, preco, QuantidadeEstoque);
             ProdutoService.setList(produto);
 
             System.out.println("\nDeseja cadastrar outro produto?");

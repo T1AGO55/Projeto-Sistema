@@ -3,7 +3,9 @@ package Service;
 import Model.Cliente;
 import Model.Produto;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ProdutoService {
 
@@ -22,7 +24,65 @@ public class ProdutoService {
         }
     }
 
+    public static void listarProdutos(){
+        Scanner scanner = new Scanner(System.in);
+        int escolha;
+        String choose;
+        do {
+            List<Produto> produtos1 = produtos.stream().toList();
 
+            System.out.println("\n============================================");
+            produtos1.forEach(produto -> System.out.println("ID: " + produto.getID() + " | Nome: " + produto.getNome() + " | Preco: R$: " + produto.getPreco()+ " | Quantidade em Estoque: " + produto.getQuantidadeEstoque()));
+            System.out.println("\n============================================");
+            System.out.println("Deseja ordenar a lista?");
+            System.out.println("(1 - Ordenar por ID)");
+            System.out.println("(2 - Ordenar por Tipo do Produto)");
+            System.out.println("(3 - Procurar por nome do Produto)");
+            System.out.println("(5 - NAO)");
+            escolha = scanner.nextInt();
+            scanner.nextLine();
+
+
+            switch (escolha) {
+                case 1:
+
+                    List<Produto> produtosID = produtos.stream().sorted(Comparator.comparingInt(Produto::getID)).toList();
+                    System.out.println("\n=========================================");
+                    produtos.forEach(produto -> System.out.println("ID: " + produto.getID() + "| Nome: " + produto.getNome() + "| Preco: R$" + produto.getPreco()+ " | Quantidade em Estoque: "+produto.getQuantidadeEstoque()));
+                    break;
+
+               case 2:
+
+                   Map<Produto.TipoProduto , List<Produto>> produtosSeparadosTipo = produtos.stream().collect(Collectors.groupingBy(Produto.TipoProduto::));
+                    System.out.println("\n=========================================");
+                    clientesNome.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpfFormatado()));
+                    break;
+/*
+                case 3:
+                    List<Cliente> clientesCPF = clientes.stream().sorted(Comparator.comparing(Cliente::getCpf)).toList();
+                    System.out.println("\n=========================================");
+                    clientesCPF.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpfFormatado()));
+                    break;
+*/
+                default:
+                    break;
+
+
+            }
+
+            System.out.println("\n=============================");
+            System.out.println("Deseja retornar ao menu?");
+            System.out.println("(1 - SIM) (2 - NAO)");
+            choose = scanner.nextLine().trim().toUpperCase();
+
+        } while (choose.equals("2") || choose.equals("NAO"));
+
+
+
+
+
+
+    }
 
 
 

@@ -1,4 +1,5 @@
 import Service.ClienteService;
+import Service.ProdutoService;
 import util.Menu;
 
 
@@ -20,7 +21,7 @@ public class Main {
                     Menu.exibirCadastroProduto();
                     break;
                 case 4:
-                    System.out.println("Listar Produtos (em desenvolvimento)");
+                    ProdutoService.listarProdutos();
                     break;
                 case 0:
                     System.out.println("Saindo do sistema...");
