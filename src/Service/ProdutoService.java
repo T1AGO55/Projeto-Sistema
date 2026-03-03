@@ -13,6 +13,17 @@ public class ProdutoService {
         produtos.add(p);
     }
 
+    public static boolean verificarIDDUP(int id) {
+        Produto produtoVerificado = produtos.stream().filter(p -> p.getID() == id).findFirst().orElse(null);
+        if (produtoVerificado != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 
 
 

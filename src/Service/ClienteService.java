@@ -67,8 +67,8 @@ public class ClienteService {
     }
 
     public static boolean verificarIDDUP(int id) {
-        Cliente teste = clientes.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
-        if (teste != null) {
+        Cliente clienteVerificado = clientes.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
+        if (clienteVerificado != null) {
             return true;
         } else {
             return false;

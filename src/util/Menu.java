@@ -84,11 +84,11 @@ public class Menu {
             do {
                 System.out.print("ID: ");
                 id = scanner.nextInt();
-                if (ClienteService.verificarIDDUP(id)) {
+                if (ProdutoService.verificarIDDUP(id)) {
                     System.out.println("ID JA FOI USADO");
                 }
 
-            } while (ClienteService.verificarIDDUP(id));
+            } while (ProdutoService.verificarIDDUP(id));
             scanner.nextLine();
             System.out.print("Nome: ");
             nome = scanner.nextLine();
