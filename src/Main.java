@@ -17,7 +17,7 @@ public class Main {
                     ClienteService.listarClientes();
                     break;
                 case 3:
-                    System.out.println("Cadastrar Produto (em desenvolvimento)");
+                    Menu.exibirCadastroProduto();
                     break;
                 case 4:
                     System.out.println("Listar Produtos (em desenvolvimento)");
