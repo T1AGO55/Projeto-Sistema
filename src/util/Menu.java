@@ -84,26 +84,27 @@ public class Menu {
             do {
                 System.out.println("Selecione o tipo do produto:");
                 int i = 1;
-                for (Produto.TipoProduto tipo : Produto.TipoProduto.values()) {
-                    System.out.println(i + " - " + tipo.getDescricao());
+                for (Produto.TipoProduto tipoProduto : Produto.TipoProduto.values()) {
+                    System.out.println(i + " - " + tipoProduto.getDescricao());
                     i++;
                 }
                 System.out.print("Escolha: ");
                 EscolhaTipoProduto = scanner.nextInt();
                 scanner.nextLine();
 
-            }while (EscolhaTipoProduto < 1 || EscolhaTipoProduto > Produto.TipoProduto.values().length);
+            } while (EscolhaTipoProduto < 1 || EscolhaTipoProduto > Produto.TipoProduto.values().length);
+            Produto.TipoProduto tipoEscolhido = Produto.TipoProduto.values()[EscolhaTipoProduto];//transforma em enum
 
             do {
                 System.out.print("ID: ");
                 id = scanner.nextInt();
-                if (ProdutoService.verificarIDDUP(id)) {
+                if (ProdutoService.verificarIDDUP(id,tipoEscolhido)) {
                     System.out.println("ID JA FOI USADO");
                 }
 
-            } while (ProdutoService.verificarIDDUP(id));
+            } while (ProdutoService.verificarIDDUP(id,tipoEscolhido));
             scanner.nextLine();
-            System.out.print("Nome: ");
+            System.out.print("Nome do Produto: ");
             nome = scanner.nextLine();
             do {
                 System.out.print("Preco: R$");
@@ -119,7 +120,7 @@ public class Menu {
 
             System.out.println("===========================");
 
-            Produto produto = new Produto(id, nome, preco, QuantidadeEstoque);
+            Produto produto = new Produto(id, nome, preco, QuantidadeEstoque, tipoEscolhido);
             ProdutoService.setList(produto);
 
             System.out.println("\nDeseja cadastrar outro produto?");

@@ -5,6 +5,7 @@ public class Produto {
     protected String nome;
     protected double preco;
     protected int QuantidadeEstoque;
+    protected TipoProduto tipoProduto;
 
     public enum TipoProduto {
 
@@ -35,11 +36,13 @@ public class Produto {
         }
     }
 
-    public Produto(int id, String nome, double preco, int QuantidadeEstoque) {
+
+    public Produto(int id, String nome, double preco, int QuantidadeEstoque, TipoProduto tipoProduto) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.QuantidadeEstoque = QuantidadeEstoque;
+        this.tipoProduto = tipoProduto;
     }
 
     public int getID() {
@@ -58,5 +61,8 @@ public class Produto {
         return QuantidadeEstoque;
     }
 
+    public TipoProduto getTipoProduto() {
+        return tipoProduto;
+    }
 
 }

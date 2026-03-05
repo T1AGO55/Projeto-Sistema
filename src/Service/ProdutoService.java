@@ -1,10 +1,8 @@
 package Service;
 
-import Model.Cliente;
 import Model.Produto;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class ProdutoService {
@@ -15,8 +13,10 @@ public class ProdutoService {
         produtos.add(p);
     }
 
-    public static boolean verificarIDDUP(int id) {
-        Produto produtoVerificado = produtos.stream().filter(p -> p.getID() == id).findFirst().orElse(null);
+    public static boolean verificarIDDUP(int id, Produto.TipoProduto tipo) {
+        Produto produtoVerificado = produtos.stream().filter(p -> p.getID() == id && p.getTipoProduto() == tipo).findFirst().orElse(null);
+
+
         if (produtoVerificado != null) {
             return true;
         } else {
@@ -48,14 +48,17 @@ public class ProdutoService {
 
                     List<Produto> produtosID = produtos.stream().sorted(Comparator.comparingInt(Produto::getID)).toList();
                     System.out.println("\n=========================================");
-                    produtos.forEach(produto -> System.out.println("ID: " + produto.getID() + "| Nome: " + produto.getNome() + "| Preco: R$" + produto.getPreco()+ " | Quantidade em Estoque: "+produto.getQuantidadeEstoque()));
+                    produtosID.forEach(produto -> System.out.println("ID: " + produto.getID() + "| Nome: " + produto.getNome() + "| Preco: R$" + produto.getPreco()+ " | Quantidade em Estoque: "+produto.getQuantidadeEstoque()));
                     break;
 
                case 2:
 
-                   Map<Produto.TipoProduto , List<Produto>> produtosSeparadosTipo = produtos.stream().collect(Collectors.groupingBy(Produto.TipoProduto::));
+                   Map<String , List<Produto>> produtosSeparadosTipo = produtos.stream().collect(Collectors.groupingBy(p-> p.getTipoProduto().getDescricao()));
                     System.out.println("\n=========================================");
-                    clientesNome.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpfFormatado()));
+                    produtosSeparadosTipo.forEach((tipo,listaproduto)->{
+                        System.out.println("Tipo do Produto: "+tipo);
+                        listaproduto.forEach(p -> System.out.println("ID: "+p.getID()+" |Nome Produto: "+p.getNome()+ " |Preco: R$"+p.getPreco()));
+                    });
                     break;
 /*
                 case 3:
