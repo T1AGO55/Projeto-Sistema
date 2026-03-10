@@ -37,7 +37,8 @@ public class ProdutoService {
             System.out.println("Deseja ordenar a lista?");
             System.out.println("(1 - Ordenar por ID)");
             System.out.println("(2 - Ordenar por Tipo do Produto)");
-            System.out.println("(3 - Procurar por nome do Produto)");
+            System.out.println("(3 - Ordenar por Preco (Crescente))");
+            System.out.println("(4 - Ordenar por Preco (Decrescente))");
             System.out.println("(5 - NAO)");
             escolha = scanner.nextInt();
             scanner.nextLine();
@@ -60,13 +61,18 @@ public class ProdutoService {
                         listaproduto.forEach(p -> System.out.println("ID: "+p.getID()+" |Nome Produto: "+p.getNome()+ " |Preco: R$"+p.getPreco()));
                     });
                     break;
-/*
+
                 case 3:
-                    List<Cliente> clientesCPF = clientes.stream().sorted(Comparator.comparing(Cliente::getCpf)).toList();
+                    List<Produto> precoProdutoCrescente = produtos.stream().sorted(Comparator.comparing(Produto::getPreco)).toList();
                     System.out.println("\n=========================================");
-                    clientesCPF.forEach(cliente -> System.out.println("ID: " + cliente.getId() + "| Nome: " + cliente.getNome() + "| CPF: " + cliente.getCpfFormatado()));
+                    precoProdutoCrescente.forEach(produto -> System.out.println("ID: " + produto.getID() + "| Nome: " + produto.getNome() + "| Preco: R$"+ produto.getPreco()));
                     break;
-*/
+
+                case 4:
+                    List<Produto> precoDescrescente = produtos.stream().sorted(Comparator.comparing(Produto::getPreco).reversed()).toList();
+                    System.out.println("\n=========================================");
+                    precoDescrescente.forEach(produto -> System.out.println("ID: " + produto.getID() + "| Nome: " + produto.getNome() + "| Preco: R$"+ produto.getPreco()));
+                    break;
                 default:
                     break;
 
